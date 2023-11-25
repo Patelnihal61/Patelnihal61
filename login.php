@@ -21,7 +21,7 @@ if(isset($_POST['submit'])){
    if(mysqli_num_rows($select) > 0){
       $row = mysqli_fetch_assoc($select);
       $_SESSION['username'] = $row['username'];
-      header('location:index(1).php');
+      header('location:index.php');
    }else{
     echo '<script>';
     echo'alert("Incorrect username or password")';
