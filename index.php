@@ -207,65 +207,7 @@
                 <div class="tab-pane fade" id="charts">
                     <h2>Charts</h2>
                     <title>Company Charts</title>
-                    <script type="py" terminal>
-                    pip install Flask requests
-                        # Import necessary libraries
-from flask import Flask, render_template, request
-import requests
-
-# Initialize Flask app
-app = Flask(__name__)
-
-# Function to get stock data from an API (e.g., Alpha Vantage)
-def get_stock_data(symbol):
-    api_key = 'YOUR_API_KEY'  # Replace with your actual API key
-    base_url = f'https://www.alphavantage.co/query'
-    function = 'TIME_SERIES_INTRADAY'
-    interval = '1min'
-
-    # Make a request to the API
-    response = requests.get(
-        f'{base_url}?function={function}&symbol={symbol}&interval={interval}&apikey={api_key}'
-    )
-
-    # Parse the response
-    data = response.json()
-    time_series_data = data.get('Time Series (1min)', {})
-    
-    # Extract the latest stock data
-    latest_data = list(time_series_data.values())[0]
-    
-    return latest_data
-
-# Route for the home page
-@app.route('/', methods=['GET', 'POST'])
-def home():
-    if request.method == 'POST':
-        symbol = request.form['symbol']
-        stock_data = get_stock_data(symbol)
-        return render_template('home.html', symbol=symbol, stock_data=stock_data)
-    return render_template('home.html')
-
-if __name__ == '__main__':
-    app.run(debug=True)
-
-                     </script>
-                    <h1>Stock Market Web App</h1>
-
-                    <form method="post" action="/">
-                        <label for="symbol">Enter Stock Symbol:</label>
-                        <input type="text" id="symbol" name="symbol" required>
-                        <button type="submit">Get Stock Data</button>
-                    </form>
-
-                    {% if symbol %}
-                    <h2>Stock Data for {{ symbol }}</h2>
-                    <p>Open: {{ stock_data['1. open'] }}</p>
-                    <p>High: {{ stock_data['2. high'] }}</p>
-                    <p>Low: {{ stock_data['3. low'] }}</p>
-                    <p>Close: {{ stock_data['4. close'] }}</p>
-                    <p>Volume: {{ stock_data['5. volume'] }}</p>
-                    {% endif %}
+                    
                 </div>
             </div>
             <thead>
